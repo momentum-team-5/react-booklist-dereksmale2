@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Redirect, useParams } from 'react-router-dom'
+import { Redirect, useParams, Link } from 'react-router-dom'
 
 const OneBook = ({ auth }) => {
   const { id } = useParams()
@@ -18,7 +18,7 @@ const OneBook = ({ auth }) => {
       })
   }, [auth, id])
 
-  const DeleteBook = () => {
+  const deleteBook = () => {
     axios
       .delete('https://books-api.glitch.me/api/books/' + id, {
         auth: auth
@@ -37,16 +37,28 @@ const OneBook = ({ auth }) => {
       <center>
         <h1>{book.title}</h1>
       </center>
+
       <center>
-        <p>{book.authors}</p>
+        <h4>Written by: {book.authors + ' '}</h4>
       </center>
+
       <center>
-        <p>{book.text}</p>
+        <p>Current status: {book.status}</p>
       </center>
+
       <center>
         <div>
-          <button onClick={DeleteBook}>
-            Remove this book from your account
+          <Link
+            className='pl0 bw0 bg-white underline pointer blue'
+            to={`/book/${book._id}/edit`}
+          >
+            Edit this book
+          </Link>{' '}
+          <button
+            className='pl0 bw0 bg-white underline pointer blue'
+            onClick={deleteBook}
+          >
+            Remove this book
           </button>
         </div>
       </center>

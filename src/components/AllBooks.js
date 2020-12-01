@@ -31,11 +31,13 @@ const AllBooks = ({ auth }) => {
               <Link to={'/book/' + book._id}>{book.title}</Link>
             </h2>
           </center>
+
+          <center>
+            <p>Written by: {book.authors + ' '}</p>
+          </center>
+
           <center>
             <p>{book.text}</p>
-          </center>
-          <center>
-            <p>Written by {book.authors}</p>
           </center>
         </div>
       ))}
