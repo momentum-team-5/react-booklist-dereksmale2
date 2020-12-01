@@ -5,7 +5,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Register from './components/Register'
 import Login from './components/Login'
 import AllBooks from './components/AllBooks'
-import { useLocalStorage } from './hooks'
+import OneBook from './components/OneBook'
+import { useLocalStorage } from './Hooks'
 
 const App = () => {
   const [auth, setAuth] = useLocalStorage('book_auth', null)
@@ -15,11 +16,16 @@ const App = () => {
       <div className='App'>
         {auth && (
           <div>
-            <span>Logged in as: {auth.username}</span> |{' '}
-            <button onClick={() => setAuth(null)}>Log out</button>
+            <center>
+              <span>Logged in as: {auth.username}</span> |{' '}
+              <button onClick={() => setAuth(null)}>Log out</button>
+            </center>
           </div>
         )}
         <Switch>
+          <Route path='/book/:id'>
+            <OneBook auth={auth} />
+          </Route>
           <Route path='/signup'>
             <Register auth={auth} onRegister={setAuth} />
           </Route>

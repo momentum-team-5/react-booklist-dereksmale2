@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 
 const AllBooks = ({ auth }) => {
   const [books, setBooks] = useState([])
@@ -13,7 +13,7 @@ const AllBooks = ({ auth }) => {
       .then((response) => {
         setBooks(response.data.books)
       })
-  })
+  }, [auth])
 
   if (!auth) {
     return <Redirect to='/login' />
@@ -21,12 +21,22 @@ const AllBooks = ({ auth }) => {
 
   return (
     <div className='Books'>
-      <h1>Books</h1>
+      <center>
+        <h1>Your Book Library</h1>
+      </center>
       {books.map((book) => (
-        <div key={book.id}>
-          <h2>{book.title}</h2>
-          <p>{book.text}</p>
-          <p>Written by {book.author}</p>
+        <div key={book._id}>
+          <center>
+            <h2>
+              <Link to={'/book/' + book._id}>{book.title}</Link>
+            </h2>
+          </center>
+          <center>
+            <p>{book.text}</p>
+          </center>
+          <center>
+            <p>Written by {book.authors}</p>
+          </center>
         </div>
       ))}
     </div>
