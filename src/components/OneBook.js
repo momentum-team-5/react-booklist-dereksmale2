@@ -43,7 +43,7 @@ const OneBook = ({ auth }) => {
       </center>
 
       <center>
-        <p>Current status: {book.status}</p>
+        <p>Currently: {book.status}</p>
       </center>
 
       <center>

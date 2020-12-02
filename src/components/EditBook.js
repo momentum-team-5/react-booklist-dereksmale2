@@ -83,31 +83,81 @@ const EditBook = ({ auth }) => {
   return (
     <div>
       <center>
-        <label>Title</label>
-        <input
-          type='text'
-          required
-          id='title'
-          value={book.title}
-          onChange={(e) => {
-            handleInput(e.target.value, 'title')
-          }}
-        />
+        <div className='pt3'>
+          <label>
+            Title:{' '}
+            <input
+              type='text'
+              required
+              id='title'
+              value={book.title}
+              onChange={(e) => {
+                handleInput(e.target.value, 'title')
+              }}
+            />
+          </label>
+        </div>
         <br />
-        <label>Authors:</label>
-        <ReactTags
-          tags={authors}
-          handleDelete={handleDelete}
-          handleAddition={handleAddition}
-          handleDrag={handleDrag}
-          delimiters={delimiters}
-        />
-        <input
-          type='radio'
-          onChange={() => {
-            setNewStatus(book.status)
-          }}
-        />
+        <div>
+          <label>
+            Authors:
+            <ReactTags
+              tags={authors}
+              handleDelete={handleDelete}
+              handleAddition={handleAddition}
+              handleDrag={handleDrag}
+              delimiters={delimiters}
+            />
+          </label>
+        </div>
+        <br />
+        <form>
+          <div>
+            <label>
+              <input
+                type='radio'
+                value='toread'
+                name='toread'
+                checked={newStatus === 'toread'}
+                onChange={(e) => {
+                  setNewStatus(e.target.value)
+                }}
+              />
+              To Read
+            </label>
+          </div>
+          <br />
+          <div>
+            <label>
+              <input
+                type='radio'
+                value='reading'
+                name='reading'
+                checked={newStatus === 'reading'}
+                onChange={(e) => {
+                  setNewStatus(e.target.value)
+                }}
+              />
+              Reading
+            </label>
+          </div>
+          <br />
+          <div>
+            <label>
+              <input
+                type='radio'
+                value='read'
+                name='read'
+                checked={newStatus === 'read'}
+                onChange={(e) => {
+                  setNewStatus(e.target.value)
+                }}
+              />
+              Read
+            </label>
+          </div>
+        </form>
+        <br />
         <button onClick={handleSubmit}>Submit</button>
       </center>
     </div>

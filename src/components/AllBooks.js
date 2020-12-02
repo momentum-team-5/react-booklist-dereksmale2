@@ -37,7 +37,7 @@ const AllBooks = ({ auth }) => {
           </center>
 
           <center>
-            <p>{book.text}</p>
+            <p>Currently: {book.status}</p>
           </center>
         </div>
       ))}
