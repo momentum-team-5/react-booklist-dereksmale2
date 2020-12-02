@@ -22,7 +22,7 @@ const AllBooks = ({ auth }) => {
   return (
     <div className='Books'>
       <center>
-        <h1>Your Book Library</h1>
+        <h1>My Book Library</h1>
       </center>
       {books.map((book) => (
         <div key={book._id}>

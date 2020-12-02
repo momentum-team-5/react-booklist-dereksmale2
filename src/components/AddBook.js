@@ -13,6 +13,7 @@ const delimiters = [KeyCodes.comma, KeyCodes.enter]
 const AddBook = ({ auth }) => {
   const { id } = useParams()
   const [book, setBook] = useState({})
+  const [title, setTitle] = useState('')
   const [authors, setAuthors] = useState([])
   const [newStatus, setNewStatus] = useState(null)
   const [submitted, setSubmitted] = useState(false)
@@ -36,8 +37,6 @@ const AddBook = ({ auth }) => {
   }, [auth, id])
 
   const handleSubmit = () => {
-    const { title } = book
-
     axios
       .post(
         'https://books-api.glitch.me/api/books/',
@@ -83,16 +82,16 @@ const AddBook = ({ auth }) => {
   return (
     <div>
       <center>
-        <div className='mw3'>
+        <div className='pt3'>
           <label>
             Title:{' '}
             <input
               type='text'
               required
               id='title'
-              value={book.title}
+              value={title}
               onChange={(e) => {
-                handleInput(e.target.value, 'title')
+                setTitle(e.target.value, 'title')
               }}
             />
           </label>
