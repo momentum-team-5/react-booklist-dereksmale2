@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
-import { useParams, Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import { WithContext as ReactTags } from 'react-tag-input' // https://github.com/prakhar1989/react-tags#readme
 
 const KeyCodes = {
@@ -11,30 +11,10 @@ const KeyCodes = {
 const delimiters = [KeyCodes.comma, KeyCodes.enter]
 
 const AddBook = ({ auth }) => {
-  const { id } = useParams()
-  const [book, setBook] = useState({})
   const [title, setTitle] = useState('')
   const [authors, setAuthors] = useState([])
   const [newStatus, setNewStatus] = useState(null)
   const [submitted, setSubmitted] = useState(false)
-
-  useEffect(() => {
-    axios
-      .get('https://books-api.glitch.me/api/books/', {
-        auth: auth
-      })
-      .then((response) => {
-        const books = response.data.books
-        const newBook = books.find((book) => book._id === id)
-
-        setAuthors(
-          newBook?.authors.map((author, index) => {
-            return { id: index.toString(), text: author }
-          }) || []
-        )
-        setBook(newBook)
-      })
-  }, [auth, id])
 
   const handleSubmit = () => {
     axios
@@ -42,7 +22,8 @@ const AddBook = ({ auth }) => {
         'https://books-api.glitch.me/api/books/',
         {
           title,
-          authors: authors.map((author) => author.text)
+          authors: authors.map((author) => author.text),
+          status: newStatus
         },
         { auth }
       )
@@ -53,12 +34,6 @@ const AddBook = ({ auth }) => {
 
   if (submitted) {
     return <Redirect to='/' />
-  }
-
-  const handleInput = (value, type) => {
-    const bookCopy = { ...book }
-    bookCopy[type] = value
-    setBook(bookCopy)
   }
 
   const handleDelete = (i) => {
@@ -91,7 +66,7 @@ const AddBook = ({ auth }) => {
               id='title'
               value={title}
               onChange={(e) => {
-                setTitle(e.target.value, 'title')
+                setTitle(e.target.value)
               }}
             />
           </label>

@@ -31,6 +31,7 @@ const EditBook = ({ auth }) => {
             return { id: index.toString(), text: author }
           }) || []
         )
+        setNewStatus(newBook.status)
         setBook(newBook)
       })
   }, [auth, id])
@@ -43,7 +44,8 @@ const EditBook = ({ auth }) => {
         'https://books-api.glitch.me/api/books/' + id,
         {
           title,
-          authors: authors.map((author) => author.text)
+          authors: authors.map((author) => author.text),
+          status: newStatus
         },
         { auth }
       )
