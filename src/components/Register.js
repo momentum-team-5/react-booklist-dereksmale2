@@ -28,32 +28,34 @@ const Register = ({ auth, onRegister }) => {
 
   return (
     <div className='Register'>
-      <h1>
-        Sign Up or <Link to='/login'>Log In</Link>
-      </h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor='username'>Username</label>
-          <input
-            type='text'
-            id='username'
-            value={username}
-            onChange={(event) => setUsername(event.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor='password'>Password</label>
-          <input
-            type='text'
-            id='password'
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-          />
-        </div>
-        <div>
-          <button type='submit'>Sign Up</button>
-        </div>
-      </form>
+      <center>
+        <h1>
+          Sign Up or <Link to='/login'>Log In</Link>
+        </h1>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor='username'>Username</label>
+            <input
+              type='text'
+              id='username'
+              value={username}
+              onChange={(event) => setUsername(event.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor='password'>Password</label>
+            <input
+              type='text'
+              id='password'
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+            />
+          </div>
+          <div>
+            <button type='submit'>Sign Up</button>
+          </div>
+        </form>
+      </center>
     </div>
   )
 }
